@@ -1,0 +1,80 @@
+﻿@model IEnumerable<_1001Rezepti.Models.RecProd>
+
+@{
+    ViewData["Title"] = "Намери рецепта";
+}
+<h1>Намери рецепти по налични продукти</h1>
+
+<form asp-action="Index" class="text-center">
+    <div class="form group">
+        <label>Намери рецепти с/със</label>
+        @if (@ViewBag.ProductIds != null)
+        {
+            <select asp-for="@Model.FirstOrDefault().Product.ProductID"
+                    asp-items="@ViewBag.ProductIds">
+                <option value="">Всички</option>
+            </select>
+        }
+        else
+        {
+            <select asp-for="@Model.FirstOrDefault().Product.ProductID">
+                <option value="">Всички</option>
+            </select>
+        }
+        <input type="submit" value="Филтрирай" class="btn btn-primary" />
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @if (ViewBag.Selected == "Всички")
+                {
+                    <label>Продукт</label>
+                }
+            </th>
+            <th>
+                <label asp-for="@Model.FirstOrDefault().Quantity"></label>
+            </th>
+            <th>
+                <label>Рецепта</label>
+            </th>
+            <th>
+                <label asp-for="@Model.FirstOrDefault().Recepie.TimeToCook"></label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (ViewBag.Selected == "Всички")
+                    {
+                        @item.Product.ProductName
+                    }
+                </td>
+                <td>
+                    @item.Quantity гр.
+                </td>
+                <td>
+                    @item.Recepie.RecepieName
+                </td>
+                <td>
+                    @item.Recepie.TimeToCook мин.
+                </td>
+                <td>
+                    <a asp-action="Details" asp-controller="Recepies" asp-route-id="@item.Recepie.RecepieID" class="btn btn-primary">Рецепта</a>
+                    <a asp-action="Edit"
+                       asp-route-productid="@item.Product.ProductID"
+                       asp-route-recepieid="@item.Recepie.RecepieID" class="btn btn-warning">Редактиране</a>
+                    <a asp-action="Delete"
+                       asp-route-productid="@item.Product.ProductID"
+                       asp-route-recepieid="@item.Recepie.RecepieID" class="btn btn-danger">Изтриване</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

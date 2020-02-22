@@ -1,0 +1,31 @@
+﻿@model _1001Rezepti.Models.Product
+
+@{
+    ViewData["Title"] = "Изтрий продукт";
+    ViewData["Background"] = "\"../../images/background.jpg\"";
+
+}
+
+<h1>Изтрий продукт</h1>
+
+<h3>Наистина ли искате да изтриете този продукт?</h3>
+<div class="center_div">
+    <hr />
+    <dl class="row center_div">
+        <dt class = "col-sm-2 center_div">
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+        <dd class = "col-sm-2 center_div">
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete" class="text-center">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="ProductID" />
+        <input type="submit" value="Изтрий" class="btn btn-danger" />
+    </form>
+</div>
+<div class="text-center">
+    <a asp-action="Index">Назад</a>
+</div>

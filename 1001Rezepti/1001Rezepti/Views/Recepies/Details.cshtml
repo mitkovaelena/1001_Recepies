@@ -1,0 +1,54 @@
+﻿@model _1001Rezepti.Models.Recepie
+
+@{
+    ViewData["Title"] = @Html.DisplayNameFor(model => model.RecepieName);
+    ViewData["Background"] = "\"../../images/background.jpg\"";
+
+}
+
+<h1>
+    @Html.DisplayFor(model => model.RecepieName)
+</h1>
+
+<div>
+    <h4>Детайли</h4>
+    <hr />
+    <dl class="row">
+        <dd class="col-sm-10 center_div text-center">
+            @if (@Model.ImagePath != null)
+            {
+                <img style="width:500px" alt="@Model.RecepieName" src="~/images/@Model.ImagePath" asp-append-version="true" />
+            }
+            else
+            {
+                <img style="width:500px" alt="Няма снимка" src="~/images/noImg.jpg" asp-append-version="true" />
+            }
+        </dd>
+        <dd class="col-sm-10 center_div text-center">
+           <h4>@Html.DisplayNameFor(model => model.Products)</h4>
+        </dd>
+        <dd class="col-sm-10 center_div text-center">
+            <ul>
+                @foreach (var item in ViewBag.ProductNames)
+                {
+                    <li> @item </li>
+                }
+            </ul>
+        </dd>
+        <dd class="col-sm-10 center_div text-center">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dd class="col-sm-10 center_div text-center">
+            <strong>@Html.DisplayNameFor(model => model.TimeToCook) : </strong>
+            @Html.DisplayFor(model => model.TimeToCook) мин.
+        </dd>
+    </dl>
+</div>
+<div class="center_div text-center">
+    <a asp-action="Edit" asp-route-id="@Model.RecepieID" class="btn btn-warning">Промени</a>
+    <a asp-action="Create" asp-controller="RecProds" asp-route-recepieid="@Model.RecepieID" class="btn btn-primary">Добави продукт</a>
+    <a asp-action="Delete" asp-route-id="@Model.RecepieID" class="btn btn-danger">Изтрий</a>
+</div>
+<div class="center_div text-center">
+    <a asp-action="Index">Назад</a>
+</div>

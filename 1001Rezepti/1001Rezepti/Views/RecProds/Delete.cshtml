@@ -1,0 +1,32 @@
+﻿@model _1001Rezepti.Models.RecProd
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>
+    Изтрий @Html.DisplayFor(model => model.Product.ProductName) от рецептата за @Html.DisplayFor(model => model.Recepie.RecepieName)
+</h1>
+
+<h3>Сигурни ли сте че искате да изтриете продукта?</h3>
+<div class="center_div">
+    <hr />
+    <dl class="row center_div">
+        <dt class = "col-sm-2 center_div">
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd class = "col-sm-2 center_div">
+            @Html.DisplayFor(model => model.Quantity) гр.
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete" class="text-center">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="RecepieId" />
+        <input type="hidden" asp-for="ProductId" />
+        <input type="submit" value="Изтрий" class="btn btn-danger" />
+    </form>
+</div>
+<div class="text-center">
+    <a asp-action="Index">Назад</a>
+</div>

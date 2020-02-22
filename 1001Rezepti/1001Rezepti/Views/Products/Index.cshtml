@@ -1,0 +1,33 @@
+﻿@model IEnumerable<_1001Rezepti.Models.Product>
+
+@{
+    ViewData["Title"] = "Продукти";
+}
+
+<h1>Всички продукти</h1>
+
+<p class="text-center">
+    <a asp-action="Create">Добави продукт</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.ProductID"class="btn btn-danger">Изтрий</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<_1001Rezepti.Models.Recepie>
+
+@{
+    ViewData["Title"] = "Рецепти";
+}
+
+<h1>Всички рецепти</h1>
+
+<p class="text-center">
+    <a asp-action="Create">Добави рецепта</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th >
+                @Html.DisplayNameFor(model => model.RecepieName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </th>
+           <!-- <th>
+                @Html.DisplayNameFor(model => model.Products)
+            </th> -->
+            <th>
+                @Html.DisplayNameFor(model => model.TimeToCook)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecepieName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescriptionShort)...
+                <a asp-action="Details" asp-route-id="@item.RecepieID">Прочети повече</a> 
+            </td>
+            <td>
+                @if (item.ImagePath != null)
+                {
+                    <img style="width:200px" alt="@item.RecepieName" src="~/images/@item.ImagePath" asp-append-version="true" />
+                }
+                else
+                {
+                    <img style="width:200px" alt="Няма снимка" src="~/images/noImg.jpg" asp-append-version="true" />
+                }
+            </td>
+          <!--  <td>
+                <ul>
+                    @foreach (var p in item.Products)
+                    {
+                          <li> @Html.DisplayFor(modelItem => p.ProductId) </li>
+                    }
+                </ul>
+            </td> -->
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeToCook)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.RecepieID" class="btn btn-primary btn-m">Детайли</a> 
+                <a asp-action="Edit" asp-route-id="@item.RecepieID" class="btn btn-warning btn-m">Промени</a> 
+                <a asp-action="Delete" asp-route-id="@item.RecepieID" class="btn btn-danger btn-m">Изтрий</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
